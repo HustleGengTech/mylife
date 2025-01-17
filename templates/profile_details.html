@@ -1,0 +1,68 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+{% if profile_details %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center bg-dark text-white">
+            <h2>{{profile_details.user.username}}'s profile</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5>First Name:</h5>
+                    <p>{{ user.profile.first_name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Last Name:</h5>
+                    <p>{{ user.profile.last_name }}</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5>Gender:</h5>
+                    <p>{{ user.profile.gender }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Phone Number:</h5>
+                    <p>{{ user.profile.phone_number }}</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5>Home Address:</h5>
+                    <p>{{ user.profile.house_address }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>City:</h5>
+                    <p>{{ user.profile.city }}</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5>State:</h5>
+                    <p>{{ user.profile.state }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Country:</h5>
+                    <p>{{ user.profile.country }}</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h5>Bio:</h5>
+                    <p>{{ user.profile.profile_bio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+<a href="{% url 'profile_info' %}" class="btn btn-primary" >Edit Your Details</a>
+<a href="{% url 'profile' pk %}" class="btn btn-primary" >Back to profile</a>
+</div>
+{% endif %}
+{% endblock %}

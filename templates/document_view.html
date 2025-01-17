@@ -1,0 +1,60 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<!-- <div class="container mt-5">
+    <h1>{{ document.title }}</h1>
+    <p>Created at: {{ document.created_at|date:"F j, Y, g:i a" }}</p>
+    <p>Last updated: {{ document.updated_at|date:"F j, Y, g:i a" }}</p>
+    <hr>
+    <div class="content">
+        <p>{{ document.content }}</p>
+    </div>
+    {% for image in document.images.all %}
+        <div class="mt-4">
+            <img src="{{ image.image.url }}" class="img-fluid" alt="Document Image" width="100px" height="100px">
+        </div>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'document_edit' document.pk %}" class="btn btn-primary">Edit Document</a>
+    <a href="{% url 'documents' %}" class="btn btn-secondary">Back to Documents</a>
+</div> -->
+
+    <div class="container my-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <!-- Document Title -->
+        <h2 class="card-title mb-3">Document Title: <strong>{{ document.title }}</strong></h2>
+
+        <!-- Document Description -->
+        <p class="card-text">
+          <strong>Description:</strong> {{ document.content }}
+        </p>
+
+        <!-- Date -->
+        <p class="card-text">
+          <strong>Date Created:</strong> {{ document.created_at|date:"F j, Y, g:i a" }}
+          <strong>Last updated:</strong> {{ document.updated_at|date:"F j, Y, g:i a" }}
+        </p>
+
+        <!-- Attached Image -->
+        {% for image in document.images.all %}
+        <div class="my-4">
+          <h5>Attached Image:</h5>
+          <img src="{{ image.image.url }}" class="img-fluid" alt="Document Image" width="100px" height="100px">
+        </div>
+        {% endfor %}
+
+        <!-- Back Button -->
+        <a href="{% url 'documents' %}" class="btn btn-secondary">Back to Documents</a>
+        <a href="{% url 'document_edit' document.pk %}" class="btn btn-sm btn-warning">Edit</a>
+        <form action="{% url 'document_delete' document.id %}" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn delete-btn btn btn-sm btn-danger">Delete</button>
+      </form>
+      </div>
+    </div>
+    </div>
+{% endblock %}

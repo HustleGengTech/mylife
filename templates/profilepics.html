@@ -1,0 +1,13 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<h2>Change your profile picure</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ p_form.as_p }}
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

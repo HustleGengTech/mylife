@@ -1,0 +1,6 @@
+    Hello {{ user.username }},
+    Thank you for signing up. Please click the link below to activate your account:
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activate my account</a>
+    If the link doesn’t work, you can copy and paste this URL into your browser:
+    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+

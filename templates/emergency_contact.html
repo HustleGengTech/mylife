@@ -1,0 +1,50 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h2>{{ form.instance.pk|yesno:"Edit,Add" }} Emergency Contact</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">{{ form.instance.pk|yesno:"Update,Add" }} Contact</button>
+            <button type="submit" class="btn btn-warning"><a href="{% url 'emergency-contact-list' %}" >Back to Contacts</a></button>
+            <button type="submit" class="btn btn-danger"><a href="{% url 'emergency-contact-add' %}" >Add Emergency Contact</a></button>
+        </form>
+        
+    </div>
+    <div class="container mt-5">
+        <h2>Your Emergency Contacts</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Relationship</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.get_relationship_display }}</td> <br>
+                    <td>{{ contact.email }}</td>
+                    <td>
+                        <a href="{% url 'emergency-contact-edit' contact.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{% url 'emergency-contact-delete' contact.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="sidebar">
+        
+        <ul>
+            <li><a href="{% url 'delete_account' %}" class="btn btn-primary mt-2">Delete Account</a></li>
+            <li><a href="{% url 'password_change' %}" class="btn btn-primary mt-2">Change Your Password</a></li>
+            <li><a href="{% url 'write_feedback' %}" class="btn btn-primary mt-2">Write to us</a></li>
+            <a href="{% url 'profile' user.pk %}" class="btn btn-danger mt-2" >Back to profile</a>
+        </ul>
+    </div>
+{% endblock %}

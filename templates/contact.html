@@ -1,0 +1,12 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<h1>Contact</h1>
+{% if profile %}
+<h2>{{profile.user.username}}'s profile</h2>
+{% endif %}
+<p>This is a Bootstrap-styled Django project.</p>
+{% endblock %}

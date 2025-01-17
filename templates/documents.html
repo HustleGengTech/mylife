@@ -1,0 +1,84 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Document{% endblock %}
+
+{% block content %}
+
+   
+
+    <!-- Display the documents if any exist -->
+    {% if documents %}
+        <!-- <ul class="document-list">
+            {% for document in documents %}
+                <li class="document-item">
+                    <div class="document-details">
+                        <h3>{{ document.title }}</h3>
+                        <p>{{ document.content|truncatewords:20 }}</p>
+                        {% for image in document.images.all %}
+                        <div class="document-image">
+                            <img src="{{ image.image.url }}" alt="{{ document.title }}" width="50px" height="50px">
+                        </div>
+    
+                        {% endfor %}
+                    </div>
+                    <div class="document-actions">
+                        <a href="{% url 'document_view' document.id %}" class="btn view-btn">View</a>
+                        <a href="{% url 'document_edit' document.id %}" class="btn edit-btn">Edit</a>
+                        <form action="{% url 'document_delete' document.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete this document?');">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul> -->
+
+    <!-- Documents Section -->
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">All Documents</h1>
+        <a href="{% url 'document_create' %}" class="btn btn-primary">Add New Document</a>
+        </div>
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Example Document Row -->
+            {% for document in documents %}
+            <tr>
+                <td>1</td>
+                <td>{{ document.title }}</td>
+                <td>{{ document.content|truncatewords:10 }}</td>
+                <td>{{ document.created_at|date:"F j, Y, g:i a" }}</td>
+                <td>
+                <a href="{% url 'document_view' document.id %}" class="btn btn-sm btn-info">View</a>
+                <a href="{% url 'document_edit' document.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{% url 'document_delete' document.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn delete-btn btn btn-sm btn-danger">Delete</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+    {% else %}
+        <p>You have no documents saved.</p>
+    {% endif %}
+
+    <!-- Link to add a new document -->
+    <div class="add-document">
+        <a href="{% url 'document_create' %}" class="btn btn-primary">Add New Document</a>
+    </div>
+{% endblock %}

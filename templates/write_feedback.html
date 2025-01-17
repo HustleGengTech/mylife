@@ -1,0 +1,34 @@
+<!-- myapp/templates/home.html -->
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+  <!-- Feedback Section -->
+  <div class="container my-5">
+    
+
+    <!-- Feedback Form -->
+    <form method="POST" class="needs-validation" novalidate>
+        <h1 class="mb-4 text-center">Write to Us</h1>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ request.user.username }}" readonly required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ request.user.email }}" readonly required>
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Your Message</label>
+        <textarea class="form-control" id="content" name="content" rows="5" placeholder="Write your feedback here..." required></textarea>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+      </div>
+    </form>
+    <a href="{% url 'feedback_history' %}">Check feedback History</a>
+  </div>
+
+{% endblock %}
