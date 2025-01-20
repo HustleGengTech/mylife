@@ -8,11 +8,11 @@ import magic
 
 
 #not secure
-ext_validator = FileExtensionValidator(['jpeg','pdf','png']) 
+ext_validator = FileExtensionValidator(['jpeg','pdf','png','jpg']) 
 
 #creating variables for image validation using python magic
 def validate_image(file):
-    accept = ['image/jpeg','application/pdf','image/png']
+    accept = ['image/jpeg','application/pdf','image/png','image/jpg']
     image_type = magic.from_buffer(file.read(1024), mime=True)
     if image_type not in accept:
         raise ValidationError('unsupported type')
