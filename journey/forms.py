@@ -85,7 +85,7 @@ class DocumentImageForm(forms.ModelForm):
         model = DocumentImage
         fields = ['image']
         widgets = {
-            'image': forms.FileInput(attrs={'accept':'.jpeg,.png,.pdf'})
+            'image': forms.FileInput(attrs={'accept':'.jpeg,.png,.pdf,.jpg'})
         }
 
 DocumentImageFormSet = modelformset_factory(DocumentImage, form=DocumentImageForm, extra=5)  
